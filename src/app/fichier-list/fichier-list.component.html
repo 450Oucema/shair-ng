@@ -1,1 +1,6 @@
-<p>fichier-list works!</p>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let fichier of fichiers; let i = index">
+    <h4>{{fichier.title}}</h4>
+    <p>{{fichier.description}}</p>
+  </li>
+</ul>

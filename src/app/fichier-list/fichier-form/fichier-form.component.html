@@ -1,0 +1,15 @@
+<form [formGroup]="fichierForm" (ngSubmit)="onSaveFichier()">
+  <div class="example-container">
+    <div class="form-group">
+      <label for="titre">Titre</label>
+      <input id="titre" class="form-control" type="text" formControlName="title">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input id="description" class="form-control" type="text" formControlName="description">
+    </div>
+    <label for="photo">Photo</label>
+    <input id="photo" type="file" (change)="detectFile($event.target.files);" class="form-control" accept="image/*">
+  </div>
+  <button type="submit">Enregistrer</button>
+</form>
