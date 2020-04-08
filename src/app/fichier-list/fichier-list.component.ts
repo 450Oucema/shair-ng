@@ -23,7 +23,6 @@ export class FichierListComponent implements OnInit, OnDestroy {
       }
     );
     this.fichierService.getFichiers();
-    this.fichierService.emitFichiers();
   }
 
   onNewFichier() {

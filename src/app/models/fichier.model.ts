@@ -1,5 +1,4 @@
 export class Fichier {
-  photo: string;
-  constructor(public title, public description: string) {
+  constructor(public title, public description: string, public details = null) {
   }
 }

@@ -6,7 +6,6 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class FichierService {
 
-   connection;
   fichiers: Fichier[] = [];
   fichiersSubject = new Subject<Fichier[]>();
 
@@ -25,7 +24,7 @@ export class FichierService {
     firebase.database().ref('/fichiers').on('value', (data) => {
       this.fichiers = data.val() ? data.val() : [];
       this.emitFichiers();
-    })
+    });
   }
   getSingleFichier(id: number) {
     return new Promise(
@@ -43,13 +42,14 @@ export class FichierService {
 
   createNewFichier(newFichier: Fichier) {
     this.fichiers.push(newFichier);
+    console.log(this.fichiers);
     this.saveFichiers();
     this.emitFichiers();
   }
 
   removeFichier(fichier: Fichier) {
-    if (fichier.photo) {
-      const storageRef = firebase.storage().refFromURL(fichier.photo);
+    if (fichier.details) {
+      const storageRef = firebase.storage().refFromURL(fichier.details);
       storageRef.delete().then(
         () => {
           console.log('Fichier supprimé');

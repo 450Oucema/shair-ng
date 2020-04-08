@@ -23,7 +23,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NoopAnimationsModule,
     BrowserModule,
     BrowserAnimationsModule,
   ],

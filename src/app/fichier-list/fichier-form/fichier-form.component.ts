@@ -34,26 +34,24 @@ export class FichierFormComponent implements OnInit {
   onSaveFichier() {
     const title = this.fichierForm.get('title').value;
     const description = this.fichierForm.get('description').value;
-    const newFichier = new Fichier(title, description);
-    if(this.fileUrl && this.fileUrl !== '') {
-      newFichier.photo = this.fileUrl;
-    }
+    const newFichier = new Fichier(title, description, this.fileUrl);
     this.fichierService.createNewFichier(newFichier);
+
+    this.router.navigate(['/fichiers']);
   }
 
   onUploadedFile(file: File) {
-    console.log(file);
     this.fileIsUploading = true;
     this.fichierService.uploadFile(file).then(
       (url: string) => {
         this.fileUrl = url;
-        this.fileIsUploading =false;
+        this.fileIsUploading = false;
         this.fileUploaded = true;
       }
-    )
+    );
   }
 
   detectFile(files: FileList) {
-    this.onUploadedFile(files.item(0))
+    this.onUploadedFile(files.item(0));
   }
 }
