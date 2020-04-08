@@ -1,12 +1,12 @@
 import {Fichier} from '../models/fichier.model';
-import {Subject} from 'rxjs';
+import {Subject} from 'rxjs/Subject';
 import * as firebase from 'firebase';
 import {Injectable} from '@angular/core';
 
 @Injectable()
 export class FichierService {
 
-  fichiers: Fichier[] ;
+  fichiers: Array<Fichier> = [];
   fichiersSubject = new Subject<Fichier[]>();
 
   constructor() {
@@ -17,7 +17,17 @@ export class FichierService {
   }
 
   saveFichiers() {
-    firebase.database().ref('/fichiers').set(this.fichiers);
+    return new Promise(
+      (resolve, reject) => {
+        console.log(firebase.database().ref('/fichiers').set(this.fichiers).then(
+          (data) => {
+            resolve(data.val());
+          }, (error) => {
+            reject(error);
+          }
+        ));
+      }
+    );
   }
 
   getFichiers() {
@@ -41,8 +51,8 @@ export class FichierService {
   }
 
   createNewFichier(newFichier: Fichier) {
-    this.fichiers.push(newFichier);
     console.log(this.fichiers);
+    this.fichiers.push(newFichier);
     this.saveFichiers();
     this.emitFichiers();
   }

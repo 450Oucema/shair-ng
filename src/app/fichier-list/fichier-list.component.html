@@ -1,6 +1,12 @@
-<ul class="list-group">
-  <li class="list-group-item" *ngFor="let fichier of fichiers; let i = index">
-    <h4>{{fichier.title}}</h4>
-    <p>{{fichier.description}}</p>
-  </li>
-</ul>
+<ion-list>
+  <ion-item href="#" *ngFor="let fichier of fichiers; let i = index">
+    <ion-avatar slot="start">
+      <img src="https://pbs.twimg.com/profile_images/1071551256236314624/6HSKqSKk_400x400.jpg">
+    </ion-avatar>
+    <ion-label>
+      <h2>{{fichier.title}}</h2>
+      <p>{{fichier.description}}</p>
+    </ion-label>
+  </ion-item>
+</ion-list>
+<button color="danger">Danger</button>

@@ -11,6 +11,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {FichierService} from './services/fichier.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
+    IonicModule.forRoot(),
   ],
   providers: [FichierService],
   bootstrap: [AppComponent]
