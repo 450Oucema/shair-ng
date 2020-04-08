@@ -9,7 +9,7 @@
       <input id="description" class="form-control" type="text" formControlName="description">
     </div>
     <label for="photo">Photo</label>
-    <input id="photo" type="file" (change)="detectFile($event.target.files);" class="form-control" accept="image/*">
+    <input id="photo" type="file" (change)="detectFile($event.target.files);" class="form-control"  accept="image/*">
   </div>
-  <button type="submit">Enregistrer</button>
+  <button [disabled]="fichierForm.invalid || fileIsUploading" class="btn btn-danger" type="submit">Enregistrer</button>
 </form>

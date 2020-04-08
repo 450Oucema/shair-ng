@@ -6,7 +6,7 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class FichierService {
 
-  fichiers: Fichier[] = [];
+  fichiers: Fichier[] ;
   fichiersSubject = new Subject<Fichier[]>();
 
   constructor() {
@@ -71,6 +71,7 @@ export class FichierService {
   }
 
   uploadFile(file: File) {
+    console.log(this.fichiers)
     return new Promise(
       (resolve, reject) => {
         const almostUniqueFileName = Date.now().toString();
