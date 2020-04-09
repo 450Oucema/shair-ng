@@ -12,13 +12,18 @@ import {HttpClientModule} from '@angular/common/http';
 import {FichierService} from './services/fichier.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { IonicModule } from '@ionic/angular';
+import {UtilityService} from "./services/utility.service";
+import { HeaderComponent } from './header/header.component';
+import {DownloadFileComponent} from "./fichier-list/download-file/download-file.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     FichierComponent,
     FichierListComponent,
-    FichierFormComponent
+    FichierFormComponent,
+    HeaderComponent,
+    DownloadFileComponent,
   ],
   imports: [
     AppRoutingModule,

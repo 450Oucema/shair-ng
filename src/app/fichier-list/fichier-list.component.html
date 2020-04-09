@@ -1,7 +1,7 @@
 <ion-list>
-  <ion-item href="#" *ngFor="let fichier of fichiers; let i = index">
-    <ion-avatar slot="start">
-      <img src="https://pbs.twimg.com/profile_images/1071551256236314624/6HSKqSKk_400x400.jpg">
+  <ion-item [routerLink]="['/fichiers','show',i]" *ngFor="let fichier of fichiers; let i = index">
+    <ion-avatar *ngIf="fichier.details" slot="start">
+      <img src="{{fichier.details}}">
     </ion-avatar>
     <ion-label>
       <h2>{{fichier.title}}</h2>
@@ -9,4 +9,3 @@
     </ion-label>
   </ion-item>
 </ion-list>
-<button color="danger">Danger</button>

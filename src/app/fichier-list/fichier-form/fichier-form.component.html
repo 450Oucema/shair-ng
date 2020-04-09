@@ -1,15 +1,17 @@
 <form [formGroup]="fichierForm" (ngSubmit)="onSaveFichier()">
-  <div class="example-container">
-    <div class="form-group">
-      <label for="titre">Titre</label>
-      <input id="titre" class="form-control" type="text" formControlName="title">
-    </div>
-    <div class="form-group">
-      <label for="description">Description</label>
-      <input id="description" class="form-control" type="text" formControlName="description">
-    </div>
-    <label for="photo">Photo</label>
-    <input id="photo" type="file" (change)="detectFile($event.target.files);" class="form-control"  accept="image/*">
-  </div>
-  <button [disabled]="fichierForm.invalid || fileIsUploading" class="btn btn-danger" type="submit">Enregistrer</button>
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-item>
+      <ion-label position="stacked">Titre<ion-text color="danger">*</ion-text></ion-label>
+      <ion-input id="titre" class="form-control" type="text" formControlName="title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Description<ion-text color="danger">*</ion-text></ion-label>
+      <ion-input id="description" class="form-control" type="text" formControlName="description"></ion-input>
+    </ion-item>
+    <ion-item>
+      <label for="photo" color="danger">Photo</label>
+      <input id="photo" style="display: none" type="file" (change)="detectFile($event.target.files);"  accept="image/*">
+    </ion-item>
+  </ion-list>
+  <ion-button [disabled]="fichierForm.invalid || fileIsUploading" color="success" type="submit">Enregistrer</ion-button>
 </form>

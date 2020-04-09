@@ -1,0 +1,4 @@
+export class UtilityService {
+  constructor() {
+  }
+}
