@@ -20,6 +20,7 @@ export class FichierComponent implements OnInit {
     this.fichierService.getSingleFichier(+id).then(
       (fichier: Fichier) => {
         this.fichier = fichier;
+        alert(this.fichier.uuid);
       }
     );
   }

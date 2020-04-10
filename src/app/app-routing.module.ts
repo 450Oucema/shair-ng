@@ -9,7 +9,7 @@ import {DownloadFileComponent} from "./fichier-list/download-file/download-file.
 const routes: Routes = [
   { path: 'fichiers', component: FichierListComponent},
   { path: 'fichiers/show/:id', component: FichierComponent},
-  { path: 'fichiers/download/:id', component: DownloadFileComponent},
+  { path: 'download/:uuid', component: DownloadFileComponent},
   { path: 'fichiers/new', component: FichierFormComponent},
   { path: '', component: FichierListComponent}
 ];

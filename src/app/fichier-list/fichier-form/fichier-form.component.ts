@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Fichier} from '../../models/fichier.model';
 import {Router} from '@angular/router';
 import {FichierService} from '../../services/fichier.service';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-fichier-form',
@@ -32,9 +33,10 @@ export class FichierFormComponent implements OnInit {
   }
 
   onSaveFichier() {
+    const uuid = uuidv4();
     const title = this.fichierForm.get('title').value;
     const description = this.fichierForm.get('description').value;
-    const newFichier = new Fichier(title, description, this.fileUrl);
+    const newFichier = new Fichier(uuid,title, description, this.fileUrl);
     this.fichierService.createNewFichier(newFichier);
 
     this.router.navigate(['/fichiers']);
