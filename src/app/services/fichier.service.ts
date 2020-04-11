@@ -2,6 +2,7 @@ import {Fichier} from '../models/fichier.model';
 import {Subject} from 'rxjs/Subject';
 import * as firebase from 'firebase';
 import {Injectable} from '@angular/core';
+import {v4 as uuid4} from 'uuid';
 
 @Injectable()
 export class FichierService {
@@ -80,12 +81,10 @@ export class FichierService {
     this.emitFichiers();
   }
 
-  uploadFile(file: File) {
-    console.log(this.fichiers)
+  uploadFile(file: File, fileName: string) {
     return new Promise(
       (resolve, reject) => {
-        const almostUniqueFileName = Date.now().toString();
-        const upload = firebase.storage().ref().child('images/' + almostUniqueFileName + file.name).put(file);
+        const upload = firebase.storage().ref().child('images/' + fileName).put(file);
         upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
           () => {
           console.log('Chargement....');
