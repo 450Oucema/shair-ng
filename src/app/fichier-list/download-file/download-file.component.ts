@@ -3,6 +3,8 @@ import {Fichier} from '../../models/fichier.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FichierService} from '../../services/fichier.service';
 import Downloader from 'js-file-downloader';
+import * as firebase from 'firebase';
+import {error} from 'util';
 
 @Component({
   selector: 'app-download-file',
@@ -15,29 +17,36 @@ export class DownloadFileComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private fichierService: FichierService, private router: Router) { }
 
-  private downloadFile(fileUrl) {
-    new Downloader({
-      url: fileUrl
-    })
-      .then( () => {
-        alert('fini');
-      })
-      .catch( (error) => {
-        console.log(error);
-      });
+  private downloadFile(fileName: string) {
+    let fileRef = firebase.storage().ref().child('images/'+fileName);
+    fileRef.getDownloadURL().then(
+      (url) => {
+        console.log(url);
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function(event) {
+          var blob = xhr.response;
+        };
+        xhr.open('GET', url);
+        xhr.send();
+    }).catch((error => {
+      console.log(error);
+    }
+    ));
   }
 
+
   ngOnInit() {
-    this.fichier = new Fichier('', '', '','');
+    this.fichier = new Fichier('', '', '','','','');
     const uuid = this.route.snapshot.params['uuid'];
     this.fichierService.findFichierByUuid(uuid).then(
       (fichier: Fichier) => {
+        console.log(fichier);
         this.fichier = fichier;
       }
     ).then(
       () => {
-        console.log(this.fichier.details);
-        this.downloadFile(this.fichier.details);
+        this.downloadFile(this.fichier.filename);
       }
     );
   }

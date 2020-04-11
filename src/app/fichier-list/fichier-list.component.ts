@@ -41,7 +41,7 @@ export class FichierListComponent implements OnInit, OnDestroy {
     this.fichierSubscription.unsubscribe();
   }
 
-  onDownload(uuid: string) {
-    this.router.navigate(['/download', uuid]);
+  onDownload(url: string) {
+    window.open(url, "_blank")
   }
 }

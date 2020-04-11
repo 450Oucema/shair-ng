@@ -9,9 +9,11 @@
       <ion-input id="description" class="form-control" type="text" formControlName="description"></ion-input>
     </ion-item>
     <ion-item>
-      <label for="photo" color="danger">Photo</label>
-      <input id="photo" style="display: none" type="file" (change)="detectFile($event.target.files);"  accept="image/*">
+      <label for="photo"><span class="btn btn-primary" color="danger">Fichier <ion-icon name="arrow-up-outline"></ion-icon></span></label>
+      <input id="photo" style="display: none" type="file" (change)="detectFile($event.target.files);"  accept="*">
     </ion-item>
   </ion-list>
-  <ion-button [disabled]="fichierForm.invalid || fileIsUploading" color="success" type="submit">Enregistrer</ion-button>
+  <div class="ion-padding">
+    <ion-button expand="block" class="ion-no-margin" [disabled]="fichierForm.invalid || fileIsUploading" color="success" type="submit">Enregistrer</ion-button>
+  </div>
 </form>

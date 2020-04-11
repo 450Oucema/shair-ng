@@ -15,12 +15,11 @@ export class FichierComponent implements OnInit {
   constructor(private route: ActivatedRoute, private fichierService: FichierService, private router: Router) { }
 
   ngOnInit() {
-    this.fichier = new Fichier('', '', '');
+    this.fichier = new Fichier('', '', '','','','');
     const id = this.route.snapshot.params['id'];
     this.fichierService.getSingleFichier(+id).then(
       (fichier: Fichier) => {
         this.fichier = fichier;
-        alert(this.fichier.uuid);
       }
     );
   }

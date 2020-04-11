@@ -8,13 +8,14 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {FichierComponent} from './fichier-list/fichier/fichier.component';
 import {FichierFormComponent} from './fichier-list/fichier-form/fichier-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, } from '@angular/common/http';
 import {FichierService} from './services/fichier.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { IonicModule } from '@ionic/angular';
 import {UtilityService} from "./services/utility.service";
 import { HeaderComponent } from './header/header.component';
 import {DownloadFileComponent} from "./fichier-list/download-file/download-file.component";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {DownloadFileComponent} from "./fichier-list/download-file/download-file.
     FichierFormComponent,
     HeaderComponent,
     DownloadFileComponent,
+    HomeComponent,
   ],
   imports: [
     AppRoutingModule,

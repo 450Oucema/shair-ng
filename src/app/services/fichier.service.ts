@@ -3,6 +3,7 @@ import {Subject} from 'rxjs/Subject';
 import * as firebase from 'firebase';
 import {Injectable} from '@angular/core';
 import {v4 as uuid4} from 'uuid';
+import {filter} from 'rxjs-compat/operator/filter';
 
 @Injectable()
 export class FichierService {
@@ -54,9 +55,9 @@ export class FichierService {
   findFichierByUuid(uuid: string) {
     return new Promise(
       (resolve, reject) => {
-        firebase.database().ref('/fichiers/').orderByChild('uuid').equalTo(uuid).once('value').then(
+        firebase.database().ref('/fichiers/').once('value').then(
           (data) => {
-            resolve(data.val()[0]);
+            resolve(data.val().find(element => element.uuid = uuid));
           }, (error) => {
             reject(error);
           }
