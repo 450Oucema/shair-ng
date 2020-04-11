@@ -1,4 +1,4 @@
 export class Fichier {
-  constructor(public uuid:string, public title:string, public description: string, public details = null) {
+  constructor(public uuid, public title, public description: string, public details = null, public filename = null) {
   }
 }

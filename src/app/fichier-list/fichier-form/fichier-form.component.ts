@@ -16,6 +16,8 @@ export class FichierFormComponent implements OnInit {
   fileIsUploading = false;
   fileUrl: string;
   fileUploaded = false;
+  fileName: string;
+  fileUuid = uuid4();
 
   constructor(private formBuilder: FormBuilder,
               private fichierService: FichierService,
@@ -36,7 +38,7 @@ export class FichierFormComponent implements OnInit {
     const uuid = uuidv4();
     const title = this.fichierForm.get('title').value;
     const description = this.fichierForm.get('description').value;
-    const newFichier = new Fichier(uuid,title, description, this.fileUrl);
+    const newFichier = new Fichier(this.fileUuid ,title, description, this.fileUrl, this.fileName);
     this.fichierService.createNewFichier(newFichier);
 
     this.router.navigate(['/fichiers']);
@@ -44,7 +46,8 @@ export class FichierFormComponent implements OnInit {
 
   onUploadedFile(file: File) {
     this.fileIsUploading = true;
-    this.fichierService.uploadFile(file).then(
+    this.fileName = this.fileUuid + file.name;
+    this.fichierService.uploadFile(file, this.fileName ).then(
       (url: string) => {
         this.fileUrl = url;
         this.fileIsUploading = false;

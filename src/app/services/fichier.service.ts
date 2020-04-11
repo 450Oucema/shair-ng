@@ -2,7 +2,7 @@ import {Fichier} from '../models/fichier.model';
 import {Subject} from 'rxjs/Subject';
 import * as firebase from 'firebase';
 import {Injectable} from '@angular/core';
-import {v4 as uuidv4} from 'uuid';
+import {v4 as uuid4} from 'uuid';
 
 @Injectable()
 export class FichierService {
@@ -37,7 +37,6 @@ export class FichierService {
       this.emitFichiers();
     });
   }
-
   getSingleFichier(id: number) {
     return new Promise(
       (resolve, reject) => {
@@ -51,6 +50,7 @@ export class FichierService {
       }
     );
   }
+
   findFichierByUuid(uuid: string) {
     return new Promise(
       (resolve, reject) => {
@@ -95,24 +95,24 @@ export class FichierService {
     this.emitFichiers();
   }
 
-  uploadFile(file: File) {
+  uploadFile(file: File, fileName: string) {
     return new Promise(
       (resolve, reject) => {
-        const uuid = uuidv4();
-        const upload = firebase.storage().ref().child('images/' + uuid + file.name).put(file);
+        const upload = firebase.storage().ref().child('images/' + fileName).put(file);
         upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
           () => {
-          console.log('Chargement....');
+            console.log('Chargement....');
           },
           (error) => {
-          console.log('Erreur de chargement !' + error);
-          reject();
+            console.log('Erreur de chargement !' + error);
+            reject();
           },
           () => {
-          resolve(upload.snapshot.ref.getDownloadURL());
+            resolve(upload.snapshot.ref.getDownloadURL());
           });
       }
     );
   }
+
 }
 
