@@ -16,6 +16,7 @@ import {UtilityService} from "./services/utility.service";
 import { HeaderComponent } from './header/header.component';
 import {DownloadFileComponent} from "./fichier-list/download-file/download-file.component";
 import { HomeComponent } from './home/home.component';
+import {TypeService} from './services/type.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule,
     IonicModule.forRoot(),
   ],
-  providers: [FichierService],
+  providers: [FichierService, TypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

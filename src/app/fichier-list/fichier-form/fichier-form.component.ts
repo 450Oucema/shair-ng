@@ -4,6 +4,8 @@ import {Fichier} from '../../models/fichier.model';
 import {Router} from '@angular/router';
 import {FichierService} from '../../services/fichier.service';
 import {v4 as uuidv4} from 'uuid';
+import {TypeService} from '../../services/type.service';
+import {Type} from '../../models/type.model';
 
 @Component({
   selector: 'app-fichier-form',
@@ -19,9 +21,11 @@ export class FichierFormComponent implements OnInit {
   fileName: string;
   fileUuid = uuidv4();
   fileExt: string;
+  fileType: Type;
 
   constructor(private formBuilder: FormBuilder,
               private fichierService: FichierService,
+              private typeService: TypeService,
               private router: Router) { }
 
   ngOnInit() {
@@ -36,6 +40,12 @@ export class FichierFormComponent implements OnInit {
   }
 
   onSaveFichier() {
+    this.typeService.findType('image/jpeg').then(
+      (type: Type) => {
+        console.log(type);
+        this.fileType = type;
+      }
+    );
     const title = this.fichierForm.get('title').value;
     const description = this.fichierForm.get('description').value;
     const newFichier = new Fichier(this.fileUuid ,title, description, this.fileUrl, this.fileName, this.fileExt);

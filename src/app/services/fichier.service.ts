@@ -21,13 +21,7 @@ export class FichierService {
   saveFichiers() {
     return new Promise(
       (resolve, reject) => {
-        console.log(firebase.database().ref('/fichiers').set(this.fichiers).then(
-          (data) => {
-            resolve(data.val());
-          }, (error) => {
-            reject(error);
-          }
-        ));
+        firebase.database().ref('/fichiers').set(this.fichiers)
       }
     );
   }

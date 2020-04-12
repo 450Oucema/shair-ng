@@ -1,8 +1,9 @@
 <ion-list>
   <div *ngFor="let fichier of fichiers; let i = index">
     <ion-item [routerLink]="['/fichiers','show',i]">
-      <ion-avatar *ngIf="fichier.details" slot="start">
-        <img src="{{fichier.details}}">
+      <ion-avatar  slot="start">
+        <img *ngIf="checkImage(fichier.filext)" src="{{fichier.details}}">
+        <img *ngIf="!checkImage(fichier.filext)" [src]="getImgIcon(fichier.filext)">
       </ion-avatar>
       <ion-label>
         <h2>{{fichier.title}}</h2>
