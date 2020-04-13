@@ -35,6 +35,16 @@ export class TypeService {
       label: "zip",
       image: "https://image.flaticon.com/icons/png/512/1465/1465628.png"
     },
+    {
+      ext: "image/vnd.adobe.photoshop",
+      label: "photoshop",
+      image: "https://icons.iconarchive.com/icons/pelfusion/flat-file-type/512/psd-icon.png"
+    },
+    {
+      ext: "unknown",
+      label: "no idea",
+      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+    },
     ];
 
   typeSubject = new Subject<Type[]>();

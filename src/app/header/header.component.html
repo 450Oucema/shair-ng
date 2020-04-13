@@ -1,14 +1,28 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom">
+    <ion-tab-button [routerLink]="['./']" routerLinkActive="active-tab" [routerLinkActiveOptions]="{ exact: true }">
+      <ion-icon name="paper-plane-outline"></ion-icon>
+      <ion-label>Accueil</ion-label>
+    </ion-tab-button>
 
-    <ion-tab-button [routerLink]="['/fichiers']">
+    <ion-tab-button *ngIf="isAuth" [routerLink]="['/fichiers']" routerLinkActive="active-tab" [routerLinkActiveOptions]="{ exact: true }">
       <ion-icon name="document"></ion-icon>
       <ion-label>Fichiers</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button [routerLink]="['/fichiers','new']">
+    <ion-tab-button *ngIf="isAuth" [routerLink]="['/fichiers','new']" routerLinkActive="active-tab" [routerLinkActiveOptions]="{ exact: true }">
       <ion-icon name="document"></ion-icon>
       <ion-label>Nouveau fichier</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button *ngIf="isAuth" (click)="onSignOut()">
+      <ion-icon name="people-circle-outline"></ion-icon>
+      <ion-label>Deconnexion</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button *ngIf="!isAuth" [routerLink]="['/login']" routerLinkActive="active-tab" [routerLinkActiveOptions]="{ exact: true }">
+      <ion-icon name="people-circle-outline"></ion-icon>
+      <ion-label>Connexion</ion-label>
     </ion-tab-button>
 
   </ion-tab-bar>

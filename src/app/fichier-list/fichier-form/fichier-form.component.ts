@@ -22,6 +22,9 @@ export class FichierFormComponent implements OnInit {
   fileUuid = uuidv4();
   fileExt: string;
   fileType: Type;
+  fileUnrecognized = false;
+  types: Type[];
+  selectedType: any;
 
   constructor(private formBuilder: FormBuilder,
               private fichierService: FichierService,
@@ -30,6 +33,7 @@ export class FichierFormComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    this.types = this.typeService.types;
   }
 
   initForm() {
@@ -57,7 +61,12 @@ export class FichierFormComponent implements OnInit {
   onUploadedFile(file: File) {
     this.fileIsUploading = true;
     this.fileName = this.fileUuid + file.name;
-    this.fileExt = file.type;
+    console.log(file.type)
+    if (file.type) {
+      this.fileExt = file.type;
+    } else {
+      this.fileExt = "unknown";
+    }
     this.fichierService.uploadFile(file, this.fileName ).then(
       (url: string) => {
         this.fileUrl = url;
