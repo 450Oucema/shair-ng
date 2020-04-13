@@ -60,10 +60,18 @@ export class FichierListComponent implements OnInit, OnDestroy {
   }
 
   getImgIcon(ext: string) {
-    let type = this.types.find(
+
+    const type = this.types.find(
       element => element.ext == ext
     );
 
-    return type.image
+    if (type) {
+      return type.image;
+    }
+    else {
+      return this.types.find(
+        element => element.ext == 'unknown'
+      ).image;
+    }
   }
 }
