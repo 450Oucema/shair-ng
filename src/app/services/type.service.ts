@@ -45,6 +45,11 @@ export class TypeService {
       label: "no idea",
       image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
     },
+    {
+      ext: "application/pdf",
+      label: "pdf",
+      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1200px-PDF_file_icon.svg.png"
+    },
     ];
 
   typeSubject = new Subject<Type[]>();
