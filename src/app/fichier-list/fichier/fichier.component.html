@@ -1,9 +1,16 @@
 <ion-card>
-  <img src="{{fichier.details}}" />
+  <img *ngIf="typeService.checkImage(fichier.filext)" src="{{fichier.details}}" />
   <ion-card-header>
     <ion-card-title>{{fichier.title}}</ion-card-title>
+    <ion-card-subtitle>{{fichier.description}}</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content>
-    {{fichier.description}}
+    <div *ngIf="typeService.checkJson(fichier.filext)" id="json">
+      {{fichierJson | json}}
+    </div>
+    <div *ngIf="typeService.checkText(fichier.filext)" id="text">
+      {{fichierText}}
+    </div>
   </ion-card-content>
+  <ion-button color="primary" (click)="getFile()">Download</ion-button>
 </ion-card>

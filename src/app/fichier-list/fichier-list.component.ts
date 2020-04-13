@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {TypeService} from '../services/type.service';
 import {Type} from '../models/type.model';
 import {element} from 'protractor';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-fichier-list',
@@ -16,7 +17,7 @@ export class FichierListComponent implements OnInit, OnDestroy {
 
   fichiers: Fichier[];
   fichierSubscription: Subscription;
-  types: Type[];
+
 
   constructor(private fichierService: FichierService, private router: Router, private typeService: TypeService) { }
 
@@ -28,7 +29,6 @@ export class FichierListComponent implements OnInit, OnDestroy {
     );
     this.typeService.saveTypes();
     this.fichierService.getFichiers();
-    this.types = this.typeService.types;
   }
 
   onNewFichier() {
@@ -51,27 +51,4 @@ export class FichierListComponent implements OnInit, OnDestroy {
     window.open(url, "_blank")
   }
 
-  checkImage(ext: string) {
-    let filterResult: Array<any> = this.types.filter(element => element.ext == ext && element.label == 'img');
-    if(filterResult.length > 0) {
-      return true;
-    }
-    return false;
-  }
-
-  getImgIcon(ext: string) {
-
-    const type = this.types.find(
-      element => element.ext == ext
-    );
-
-    if (type) {
-      return type.image;
-    }
-    else {
-      return this.types.find(
-        element => element.ext == 'unknown'
-      ).image;
-    }
-  }
 }

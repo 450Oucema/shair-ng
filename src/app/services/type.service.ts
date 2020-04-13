@@ -50,6 +50,26 @@ export class TypeService {
       label: "pdf",
       image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1200px-PDF_file_icon.svg.png"
     },
+    {
+      ext: "application/json",
+      label: "json",
+      image: "assets/icons/json.jpg"
+    },
+    {
+      ext: "text/plain",
+      label: "text",
+      image: "https://previews.123rf.com/images/arcady31/arcady311604/arcady31160400053/55145543-text-file-icon.jpg"
+    },
+    {
+      ext: "application/vnd.ms-excel",
+      label: "text",
+      image: "https://previews.123rf.com/images/arcady31/arcady311604/arcady31160400053/55145543-text-file-icon.jpg"
+    },
+    {
+      ext: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      label: "word",
+      image: "https://previews.123rf.com/images/arcady31/arcady311604/arcady31160400053/55145543-text-file-icon.jpg"
+    },
     ];
 
   typeSubject = new Subject<Type[]>();
@@ -96,4 +116,43 @@ export class TypeService {
     );
   }
 
+  checkImage(ext: string) {
+    let filterResult: Array<any> = this.types.filter(element => element.ext == ext && element.label == 'img');
+    if(filterResult.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  getImgIcon(ext: string) {
+
+    const type = this.types.find(
+      element => element.ext == ext
+    );
+
+    if (type) {
+      return type.image;
+    }
+    else {
+      return this.types.find(
+        element => element.ext == 'unknown'
+      ).image;
+    }
+  }
+
+  checkJson(ext: string) {
+    let filterResult: Array<any> = this.types.filter(element => element.ext == ext && element.label == 'json');
+    if(filterResult.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  checkText(ext: string) {
+    let filterResult: Array<any> = this.types.filter(element => element.ext == ext && element.label == 'text');
+    if(filterResult.length > 0) {
+      return true;
+    }
+    return false;
+  }
 }
