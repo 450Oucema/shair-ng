@@ -1,5 +1,8 @@
 <ion-list>
-  <div *ngFor="let fichier of fichiers; let i = index">
+  <ion-list-header class="ion-text-center" lines="inset">
+    <ion-label><h3>Vos fichiers </h3><br> Glissez vers la gauche pour afficher les options</ion-label>
+  </ion-list-header>
+  <ion-item-sliding  *ngFor="let fichier of fichiers; let i = index">
     <ion-item [routerLink]="['/fichiers','show',i]">
       <ion-avatar  slot="start">
         <img *ngIf="checkImage(fichier.filext)" src="{{fichier.details}}">
@@ -10,6 +13,11 @@
         <p>{{fichier.description}}</p>
       </ion-label>
     </ion-item>
-    <ion-button (click)="onDownload(fichier.details)" color="success">Download</ion-button>
-  </div>
+    <ion-item-options>
+      <ion-item-option (click)="onDownload(fichier.details)" color="primary">
+        <ion-icon name="download-outline"></ion-icon>
+        Télécharger
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
 </ion-list>

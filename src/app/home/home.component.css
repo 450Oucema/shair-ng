@@ -1,16 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
-* {
-  font-family: 'Poppins', sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
 body, html {
   height: 100%;
   margin: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
 .bg {
-  /* The image used */
+  /* The image used
   background-image: url("https://wallpaperaccess.com/full/189045.jpg");
-
+  */
+  background-color: #020230;
   /* Full height */
   height: 100%;
 
@@ -22,7 +22,6 @@ body, html {
 
 .center {
   left: 0;
-  line-height: 200px;
   margin-top: -100px;
   position: absolute;
   text-align: center;
@@ -30,6 +29,17 @@ body, html {
   width: 100%;
 }
 
-.shair-header {
-  font-size: 50px;
+.hero-text {
+  font-weight: 400;
+}
+.hero-heading {
+  font-weight: 600;
+}
+
+.navbar-brand {
+  font-weight: 600;
+}
+
+.shair-logo {
+  max-width: 200px;
 }
