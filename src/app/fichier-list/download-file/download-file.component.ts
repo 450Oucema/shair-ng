@@ -17,8 +17,8 @@ export class DownloadFileComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private fichierService: FichierService, private router: Router) { }
 
-  private downloadFile(fileName: string) {
-    let fileRef = firebase.storage().ref().child('images/'+fileName);
+  public downloadFile(fileName: string) {
+    let fileRef = firebase.storage().ref().child('images/'+ firebase.auth().currentUser.email + '/'  + fileName);
     fileRef.getDownloadURL().then(
       (url) => {
         console.log(url);

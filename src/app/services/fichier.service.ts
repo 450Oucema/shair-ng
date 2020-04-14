@@ -2,16 +2,17 @@ import {Fichier} from '../models/fichier.model';
 import {Subject} from 'rxjs/Subject';
 import * as firebase from 'firebase';
 import {Injectable} from '@angular/core';
-import {v4 as uuid4} from 'uuid';
-import {filter} from 'rxjs-compat/operator/filter';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class FichierService {
 
   fichiers: Array<Fichier> = [];
   fichiersSubject = new Subject<Fichier[]>();
+  blobs: string;
+  blobsSubject = new Subject<Object[]>();
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
   }
 
   emitFichiers() {
@@ -21,13 +22,13 @@ export class FichierService {
   saveFichiers() {
     return new Promise(
       (resolve, reject) => {
-        firebase.database().ref('/fichiers').set(this.fichiers)
+        firebase.database().ref('/fichiers/'+firebase.auth().currentUser.uid).set(this.fichiers)
       }
     );
   }
 
   getFichiers() {
-    firebase.database().ref('/fichiers').on('value', (data) => {
+    firebase.database().ref('/fichiers/'+firebase.auth().currentUser.uid).on('value', (data) => {
       this.fichiers = data.val() ? data.val() : [];
       this.emitFichiers();
     });
@@ -35,7 +36,7 @@ export class FichierService {
   getSingleFichier(id: number) {
     return new Promise(
       (resolve, reject) => {
-        firebase.database().ref('/fichiers/' + id).once('value').then(
+        firebase.database().ref('/fichiers/' + firebase.auth().currentUser.uid + '/' + id).once('value').then(
           (data) => {
             resolve(data.val());
           }, (error) => {
@@ -49,7 +50,7 @@ export class FichierService {
   findFichierByUuid(uuid: string) {
     return new Promise(
       (resolve, reject) => {
-        firebase.database().ref('/fichiers/').once('value').then(
+        firebase.database().ref('/fichiers/'+firebase.auth().currentUser.uid+'/').once('value').then(
           (data) => {
             resolve(data.val().find(element => element.uuid = uuid));
           }, (error) => {
@@ -93,7 +94,7 @@ export class FichierService {
   uploadFile(file: File, fileName: string) {
     return new Promise(
       (resolve, reject) => {
-        const upload = firebase.storage().ref().child('images/' + fileName).put(file);
+        const upload = firebase.storage().ref().child('images/' + firebase.auth().currentUser.email +'/' + fileName).put(file);
         upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
           () => {
             console.log('Chargement....');
@@ -108,6 +109,5 @@ export class FichierService {
       }
     );
   }
-
 }
 
