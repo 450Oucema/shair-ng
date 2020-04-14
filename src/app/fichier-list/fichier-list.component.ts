@@ -17,6 +17,7 @@ export class FichierListComponent implements OnInit, OnDestroy {
 
   fichiers: Fichier[];
   fichierSubscription: Subscription;
+  today: Date = new Date();
 
 
   constructor(private fichierService: FichierService, private router: Router, private typeService: TypeService) { }
@@ -51,4 +52,7 @@ export class FichierListComponent implements OnInit, OnDestroy {
     window.open(url, "_blank")
   }
 
+  checkAvailability(expiration: Date) {
+    return new Date(expiration) > new Date();
+  }
 }

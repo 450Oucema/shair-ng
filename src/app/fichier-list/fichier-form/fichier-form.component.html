@@ -1,19 +1,25 @@
-<form [formGroup]="fichierForm" (ngSubmit)="onSaveFichier()">
-  <ion-list lines="full" class="ion-no-margin ion-no-padding">
-    <ion-item>
-      <ion-label position="stacked">Titre<ion-text color="danger">*</ion-text></ion-label>
-      <ion-input id="titre" type="text" formControlName="title"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Description<ion-text color="danger">*</ion-text></ion-label>
-      <ion-input id="description" type="text" formControlName="description"></ion-input>
-    </ion-item>
-    <ion-item>
-      <label for="photo"><span class="btn btn-primary" color="danger">Fichier <ion-icon name="arrow-up-outline"></ion-icon></span></label>
-      <input id="photo" style="display: none" type="file" (change)="detectFile($event.target.files);"  accept="*">
-    </ion-item>
-  </ion-list>
-  <div class="ion-padding">
-    <ion-button expand="block" class="ion-no-margin" [disabled]="fichierForm.invalid || fileIsUploading || fileUnrecognized" color="success" type="submit">Enregistrer</ion-button>
-  </div>
-</form>
+<ion-content>
+  <form [formGroup]="fichierForm" (ngSubmit)="onSaveFichier()">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Titre<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input id="titre" type="text" formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Description</ion-label>
+        <ion-input id="description" type="text" formControlName="description"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Date d'expiration</ion-label>
+        <ion-datetime formControlName="expiration" [min]="today" placeholder="Selectionnez une date"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <label for="photo"><span class="btn btn-primary" color="danger">Fichier <ion-icon name="arrow-up-outline"></ion-icon></span></label>
+        <input id="photo" style="display: none" type="file" (change)="detectFile($event.target.files);"  accept="*">
+      </ion-item>
+    </ion-list>
+    <div class="ion-padding">
+      <ion-button expand="block" class="ion-no-margin" [disabled]="fichierForm.invalid || fileIsUploading || fileUnrecognized" color="success" type="submit">Enregistrer</ion-button>
+    </div>
+  </form>
+</ion-content>

@@ -1,21 +1,23 @@
-<ion-list>
+<ion-content class="scroll-content">
   <ion-list-header class="ion-text-center" lines="inset">
     <ion-label><ion-title size="large">Vos fichiers </ion-title></ion-label>
   </ion-list-header>
-  <div  *ngFor="let fichier of fichiers; let i = index">
-    <ion-item [routerLink]="['/fichiers','show',i]">
-      <ion-avatar  slot="start">
-        <img *ngIf="typeService.checkImage(fichier.filext)" src="{{fichier.details}}">
-        <img *ngIf="!typeService.checkImage(fichier.filext)" [src]="typeService.getImgIcon(fichier.filext)">
-      </ion-avatar>
-      <ion-label>
-        <ion-title size="default">{{fichier.title}}</ion-title>
-        <ion-text>{{fichier.description}}</ion-text>
-      </ion-label>
-      <ion-button size="default" (click)="onDownload(fichier.details)" color="primary">
-        <ion-icon name="download-outline"></ion-icon>
-        Télécharger
-      </ion-button>
-    </ion-item>
-  </div>
-</ion-list>
+  <ion-list>
+    <div  *ngFor="let fichier of fichiers; let i = index">
+      <ion-item [routerLink]="['/fichiers','show',i]">
+        <ion-avatar  slot="start">
+          <img *ngIf="typeService.checkImage(fichier.filext)" src="{{fichier.details}}">
+          <img *ngIf="!typeService.checkImage(fichier.filext)" [src]="typeService.getImgIcon(fichier.filext)">
+        </ion-avatar>
+        <ion-label>
+          <ion-title size="default">{{fichier.title}}</ion-title>
+          <ion-text>{{fichier.description}}</ion-text>
+        </ion-label>
+        <ion-button *ngIf="checkAvailability(fichier.expiration)" size="default" (click)="onDownload(fichier.details)" color="primary">
+          <ion-icon name="download-outline"></ion-icon>
+          Télécharger
+        </ion-button>
+      </ion-item>
+    </div>
+  </ion-list>
+</ion-content>
