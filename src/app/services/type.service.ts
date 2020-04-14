@@ -53,22 +53,22 @@ export class TypeService {
     {
       ext: "application/json",
       label: "json",
-      image: "assets/icons/json.jpg"
+      image: "http://icons.iconarchive.com/icons/papirus-team/papirus-mimetypes/256/app-json-icon.png"
     },
     {
       ext: "text/plain",
       label: "text",
-      image: "https://previews.123rf.com/images/arcady31/arcady311604/arcady31160400053/55145543-text-file-icon.jpg"
+      image: "http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-8/256/Text-align-right-icon.png"
     },
     {
       ext: "application/vnd.ms-excel",
       label: "text",
-      image: "https://previews.123rf.com/images/arcady31/arcady311604/arcady31160400053/55145543-text-file-icon.jpg"
+      image: "https://icons.iconarchive.com/icons/carlosjj/microsoft-office-2013/256/Excel-icon.png"
     },
     {
       ext: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       label: "word",
-      image: "https://previews.123rf.com/images/arcady31/arcady311604/arcady31160400053/55145543-text-file-icon.jpg"
+      image: "https://icons.iconarchive.com/icons/carlosjj/microsoft-office-2013/256/Word-icon.png"
     },
     ];
 

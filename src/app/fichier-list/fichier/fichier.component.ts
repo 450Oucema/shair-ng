@@ -3,8 +3,6 @@ import {Fichier} from "../../models/fichier.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FichierService} from "../../services/fichier.service";
 import {TypeService} from '../../services/type.service';
-import { ajax, AjaxResponse } from 'rxjs/ajax';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 
@@ -22,7 +20,7 @@ export class FichierComponent implements OnInit {
   constructor(private route: ActivatedRoute, private fichierService: FichierService, private router: Router, private typeService: TypeService, private http: HttpClient) { }
 
   ngOnInit() {
-    this.fichier = new Fichier('', '', '','','','');
+    this.fichier = new Fichier('', '', '','','','',null);
     const id = this.route.snapshot.params['id'];
     this.fichierService.getSingleFichier(+id).then(
       (fichier: Fichier) => {

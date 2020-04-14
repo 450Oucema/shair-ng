@@ -25,6 +25,8 @@ export class FichierFormComponent implements OnInit {
   fileUnrecognized = false;
   types: Type[];
   selectedType: any;
+  today = new Date().toISOString();
+  fileExpiration: any;
 
   constructor(private formBuilder: FormBuilder,
               private fichierService: FichierService,
@@ -39,7 +41,8 @@ export class FichierFormComponent implements OnInit {
   initForm() {
     this.fichierForm = this.formBuilder.group({
       title: ['', Validators.required],
-      description: ['', Validators.required]
+      description: [''],
+      expiration: [''],
     });
   }
 
@@ -52,7 +55,8 @@ export class FichierFormComponent implements OnInit {
     );
     const title = this.fichierForm.get('title').value;
     const description = this.fichierForm.get('description').value;
-    const newFichier = new Fichier(this.fileUuid ,title, description, this.fileUrl, this.fileName, this.fileExt);
+    const expiration  = this.fichierForm.get('expiration').value;
+    const newFichier = new Fichier(this.fileUuid ,title, description, this.fileUrl, this.fileName, this.fileExt, expiration);
     this.fichierService.createNewFichier(newFichier);
 
     this.router.navigate(['/fichiers']);
