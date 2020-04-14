@@ -37,7 +37,7 @@ export class FichierListComponent implements OnInit, OnDestroy {
   }
 
   onViewFichier(id: number) {
-    this.router.navigate(['/fichiers', 'show', id]);
+    this.router.navigate(['fichiers', 'show', id]);
   }
 
   onDeleteFichier(fichier: Fichier) {
@@ -54,5 +54,16 @@ export class FichierListComponent implements OnInit, OnDestroy {
 
   checkAvailability(expiration: Date) {
     return new Date(expiration) > new Date();
+  }
+
+  onCopy(details: string, uuid: string) {
+    let input = document.getElementById(uuid) as HTMLInputElement;
+    input.focus();
+    input.select();
+    try {
+      document.execCommand('copy');
+    }catch (e) {
+      console.log(e)
+    }
   }
 }

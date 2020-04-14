@@ -1,4 +1,12 @@
 <ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>Envoyer un fichier</ion-title>
+    </ion-toolbar>
+  </ion-header>
   <form [formGroup]="fichierForm" (ngSubmit)="onSaveFichier()">
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
@@ -19,7 +27,10 @@
       </ion-item>
     </ion-list>
     <div class="ion-padding">
-      <ion-button expand="block" class="ion-no-margin" [disabled]="fichierForm.invalid || fileIsUploading || fileUnrecognized" color="success" type="submit">Enregistrer</ion-button>
+      <ion-button expand="block" class="ion-no-margin" [disabled]="fichierForm.invalid || fileIsUploading || fileUnrecognized" color="primary" type="submit">
+        Enregistrer
+      </ion-button>
+      <span *ngIf="fileIsUploading" class="align-content-center"><ion-spinner name="dots"></ion-spinner></span>
     </div>
   </form>
 </ion-content>

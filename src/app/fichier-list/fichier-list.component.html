@@ -1,23 +1,39 @@
 <ion-content class="scroll-content">
-  <ion-list-header class="ion-text-center" lines="inset">
-    <ion-label><ion-title size="large">Vos fichiers </ion-title></ion-label>
-  </ion-list-header>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>Mes fichiers</ion-title>
+    </ion-toolbar>
+  </ion-header>
   <ion-list>
-    <div  *ngFor="let fichier of fichiers; let i = index">
+    <div *ngFor="let fichier of fichiers; let i = index">
+      <ion-item-sliding>
       <ion-item [routerLink]="['/fichiers','show',i]">
-        <ion-avatar  slot="start">
-          <img *ngIf="typeService.checkImage(fichier.filext)" src="{{fichier.details}}">
-          <img *ngIf="!typeService.checkImage(fichier.filext)" [src]="typeService.getImgIcon(fichier.filext)">
-        </ion-avatar>
-        <ion-label>
-          <ion-title size="default">{{fichier.title}}</ion-title>
-          <ion-text>{{fichier.description}}</ion-text>
-        </ion-label>
-        <ion-button *ngIf="checkAvailability(fichier.expiration)" size="default" (click)="onDownload(fichier.details)" color="primary">
-          <ion-icon name="download-outline"></ion-icon>
-          Télécharger
-        </ion-button>
+          <ion-avatar slot="start">
+            <img *ngIf="typeService.checkImage(fichier.filext)" src="{{fichier.details}}">
+            <img *ngIf="!typeService.checkImage(fichier.filext)" [src]="typeService.getImgIcon(fichier.filext)">
+          </ion-avatar>
+          <ion-label>
+            <ion-title size="default">{{fichier.title}}</ion-title>
+          </ion-label>
+          <ion-label *ngIf="checkAvailability(fichier.expiration)" slot="end">
+             <ion-icon name="chevron-forward-outline"></ion-icon>
+          </ion-label>
+        <input type="text" class="hidden" [value]="fichier.details" [id]="fichier.uuid">
       </ion-item>
+        <ion-item-options *ngIf="checkAvailability(fichier.expiration)">
+          <ion-item-option  size="small" (click)="onDownload(fichier.details)"  color="primary">
+            <ion-icon name="cloud-download-outline"></ion-icon>
+            Télécharger
+          </ion-item-option>
+          <ion-item-option size="small" (click)="onCopy(fichier.details, fichier.uuid)" color="secondary">
+            <ion-icon name="copy-outline"></ion-icon>
+            Copier
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
     </div>
   </ion-list>
 </ion-content>

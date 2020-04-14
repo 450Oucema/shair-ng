@@ -145,14 +145,21 @@ export class TypeService {
     if(filterResult.length > 0) {
       return true;
     }
+
     return false;
   }
 
   checkText(ext: string) {
     let filterResult: Array<any> = this.types.filter(element => element.ext == ext && element.label == 'text');
+
     if(filterResult.length > 0) {
       return true;
     }
+
+    if(ext.split('/')[0] === 'text') {
+      return true;
+    }
+
     return false;
   }
 }
