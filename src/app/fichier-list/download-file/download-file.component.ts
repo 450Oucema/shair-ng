@@ -37,7 +37,7 @@ export class DownloadFileComponent implements OnInit {
 
 
   ngOnInit() {
-    this.fichier = new Fichier('', '', '','','','');
+    this.fichier = new Fichier('', '', '','','','',null);
     const uuid = this.route.snapshot.params['uuid'];
     this.fichierService.findFichierByUuid(uuid).then(
       (fichier: Fichier) => {

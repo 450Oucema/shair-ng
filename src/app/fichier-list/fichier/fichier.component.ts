@@ -17,7 +17,7 @@ export class FichierComponent implements OnInit {
   fichierJson;
   fichierText;
 
-  constructor(private route: ActivatedRoute, private fichierService: FichierService, private router: Router, private typeService: TypeService, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, public fichierService: FichierService, private router: Router, public typeService: TypeService, private http: HttpClient) { }
 
   ngOnInit() {
     this.fichier = new Fichier('', '', '','','','',null);

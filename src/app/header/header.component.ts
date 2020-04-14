@@ -9,7 +9,7 @@ import {AuthService} from "../services/auth.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  private isAuth: boolean;
+  public isAuth: boolean;
 
   constructor(private menu: MenuController, private authService: AuthService) { }
 

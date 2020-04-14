@@ -20,7 +20,7 @@ export class FichierListComponent implements OnInit, OnDestroy {
   today: Date = new Date();
 
 
-  constructor(private fichierService: FichierService, private router: Router, private typeService: TypeService) { }
+  constructor(private fichierService: FichierService, private router: Router, public typeService: TypeService) { }
 
   ngOnInit() {
     this.fichierSubscription = this.fichierService.fichiersSubject.subscribe(
