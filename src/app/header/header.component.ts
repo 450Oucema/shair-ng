@@ -45,6 +45,7 @@ export class HeaderComponent implements OnInit {
     }
     return false;
   }
+
   openFirst() {
     this.menu.enable(true, 'first');
     this.menu.open('first');

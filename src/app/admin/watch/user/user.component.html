@@ -1,0 +1,23 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/admin/watch" text="Retour"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Fichiers</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list>
+    <ion-item *ngFor="let fichier of fichiers">
+      <ion-avatar *ngIf="typeService.checkImage(fichier.filext)" slot="start">
+        <img [src]="fichier.details" alt="">
+      </ion-avatar>
+      <ion-label slot="start">
+        <ion-title size="default">{{fichier.title}}</ion-title>
+      </ion-label>
+      <ion-label slot="end">
+        <p>{{fichier.filext}} - {{fichier.expiration | date:'medium'}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
