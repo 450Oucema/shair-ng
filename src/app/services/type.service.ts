@@ -83,7 +83,6 @@ export class TypeService {
   saveTypes() {
     return new Promise(
       (resolve, reject) => {
-        console.log(this.types.find(element => element.label = 'img'));
         firebase.database().ref('/types').set(this.types)
       }
     );

@@ -7,28 +7,35 @@ import {HttpClient} from '@angular/common/http';
 @Injectable()
 export class FichierService {
 
-  fichiers: Array<Fichier> = [];
+  fichiers: Array<any>;
   fichiersSubject = new Subject<Fichier[]>();
-  blobs: string;
-  blobsSubject = new Subject<Object[]>();
+  users: Array<any>;
+  usersSubject = new Subject<any>();
 
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private httpClient: HttpClient) { }
 
   emitFichiers() {
     this.fichiersSubject.next(this.fichiers);
   }
 
+  emitUsers() {
+    this.usersSubject.next(this.users);
+  }
+
   saveFichiers() {
     return new Promise(
       (resolve, reject) => {
+        console.log(this.fichiers)
         firebase.database().ref('/fichiers/'+firebase.auth().currentUser.uid).set(this.fichiers)
       }
     );
   }
 
-  getFichiers() {
-    firebase.database().ref('/fichiers/'+firebase.auth().currentUser.uid).on('value', (data) => {
+  getFichiers(uid = null) {
+    if(!uid) {
+      uid = firebase.auth().currentUser.uid;
+    }
+    firebase.database().ref('/fichiers/'+ uid).on('value', (data) => {
       this.fichiers = data.val() ? data.val() : [];
       this.emitFichiers();
     });
@@ -52,7 +59,7 @@ export class FichierService {
       (resolve, reject) => {
         firebase.database().ref('/fichiers/'+firebase.auth().currentUser.uid+'/').once('value').then(
           (data) => {
-            resolve(data.val().find(element => element.uuid = uuid));
+            resolve(data.val());
           }, (error) => {
             reject(error);
           }
@@ -62,7 +69,6 @@ export class FichierService {
   }
 
   createNewFichier(newFichier: Fichier) {
-    console.log(this.fichiers);
     this.fichiers.push(newFichier);
     this.saveFichiers();
     this.emitFichiers();
@@ -96,9 +102,7 @@ export class FichierService {
       (resolve, reject) => {
         const upload = firebase.storage().ref().child('images/' + firebase.auth().currentUser.email +'/' + fileName).put(file);
         upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
-          () => {
-            console.log('Chargement....');
-          },
+          (data) => {},
           (error) => {
             console.log('Erreur de chargement !' + error);
             reject();
@@ -106,6 +110,45 @@ export class FichierService {
           () => {
             resolve(upload.snapshot.ref.getDownloadURL());
           });
+      }
+    );
+  }
+
+  onCopy(val: string){
+    let selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+  }
+
+  onDownload(url: string) {
+    window.open(url, "_blank")
+  }
+
+  getUsersFiles() {
+    firebase.database().ref('/users/').on('value', (data) => {
+      this.users = data.val();
+      this.emitUsers();
+    });
+  }
+
+  createNewFichierUser(newFichier: Fichier, user: string) {
+    this.fichiers.push(newFichier);
+    this.saveFichiersUser(user);
+    this.emitFichiers();
+  }
+
+  saveFichiersUser(user: string) {
+    return new Promise(
+      (resolve, reject) => {
+        firebase.database().ref('/fichiers/'+ user).set(this.fichiers)
       }
     );
   }

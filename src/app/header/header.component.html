@@ -10,14 +10,14 @@
       <ion-label>Fichiers</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button *ngIf="isAuth" [routerLink]="['/fichiers','new']" routerLinkActive="active-tab" [routerLinkActiveOptions]="{ exact: true }">
-      <ion-icon name="document"></ion-icon>
-      <ion-label>Nouveau fichier</ion-label>
+    <ion-tab-button *ngIf="isAuth" [routerLink]="['account']" routerLinkActive="active-tab" [routerLinkActiveOptions]="{ exact: true }">
+      <ion-icon name="cog-outline"></ion-icon>
+      <ion-label>Paramètres</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button *ngIf="isAuth" (click)="onSignOut()">
-      <ion-icon name="people-circle-outline"></ion-icon>
-      <ion-label>Deconnexion</ion-label>
+    <ion-tab-button *ngIf="isAdmin" [routerLink]="['admin']" routerLinkActive="active-tab">
+      <ion-icon name="flame-outline"></ion-icon>
+      <ion-label>Admin</ion-label>
     </ion-tab-button>
 
     <ion-tab-button *ngIf="!isAuth" [routerLink]="['/login']" routerLinkActive="active-tab" [routerLinkActiveOptions]="{ exact: true }">

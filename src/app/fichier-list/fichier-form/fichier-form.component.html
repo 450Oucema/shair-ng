@@ -2,7 +2,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
+        <ion-back-button defaultHref="/" text="Retour"></ion-back-button>
       </ion-buttons>
       <ion-title>Envoyer un fichier</ion-title>
     </ion-toolbar>
@@ -24,6 +24,12 @@
       <ion-item>
         <label for="photo"><span class="btn btn-primary" color="danger">Fichier <ion-icon name="arrow-up-outline"></ion-icon></span></label>
         <input id="photo" style="display: none" type="file" (change)="detectFile($event.target.files);"  accept="*">
+      </ion-item>
+      <ion-item>
+        <ion-label>Utilisateur</ion-label>
+        <ion-select formControlName="user" interface="popover">
+          <ion-select-option *ngFor="let user of users;" value="{{user.uid}}">{{user.email}}</ion-select-option>
+        </ion-select>
       </ion-item>
     </ion-list>
     <div class="ion-padding">

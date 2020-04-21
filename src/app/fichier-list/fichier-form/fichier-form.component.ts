@@ -6,6 +6,7 @@ import {FichierService} from '../../services/fichier.service';
 import {v4 as uuidv4} from 'uuid';
 import {TypeService} from '../../services/type.service';
 import {Type} from '../../models/type.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-fichier-form',
@@ -14,6 +15,7 @@ import {Type} from '../../models/type.model';
 })
 export class FichierFormComponent implements OnInit {
 
+  userSubscription: Subscription;
   fichierForm: FormGroup;
   fileIsUploading = false;
   fileUrl: string;
@@ -27,6 +29,7 @@ export class FichierFormComponent implements OnInit {
   selectedType: any;
   today = new Date().toISOString();
   fileExpiration: any;
+  users: Array<any>;
 
   constructor(private formBuilder: FormBuilder,
               private fichierService: FichierService,
@@ -36,6 +39,12 @@ export class FichierFormComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.types = this.typeService.types;
+    this.userSubscription = this.fichierService.usersSubject.subscribe(
+      (users: Array<any>) => {
+        this.users = users;
+      }
+    );
+    this.fichierService.getUsersFiles();
   }
 
   initForm() {
@@ -43,6 +52,7 @@ export class FichierFormComponent implements OnInit {
       title: ['', Validators.required],
       description: [''],
       expiration: [''],
+      user: [''],
     });
   }
 
@@ -56,10 +66,11 @@ export class FichierFormComponent implements OnInit {
     const title = this.fichierForm.get('title').value;
     const description = this.fichierForm.get('description').value;
     const expiration  = this.fichierForm.get('expiration').value;
+    const user  = this.fichierForm.get('user').value;
     const newFichier = new Fichier(this.fileUuid ,title, description, this.fileUrl, this.fileName, this.fileExt, expiration);
-    this.fichierService.createNewFichier(newFichier);
+    this.fichierService.createNewFichierUser(newFichier, user);
 
-    this.router.navigate(['/fichiers']);
+    this.router.navigate(['/admin']);
   }
 
   onUploadedFile(file: File) {

@@ -1,16 +1,18 @@
-<form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
-  <ion-list lines="full" class="ion-no-margin ion-no-padding">
-    <ion-item>
-      <ion-label position="stacked">Email</ion-label>
-      <ion-input id="email"  type="text" formControlName="email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Mot de passe<</ion-label>
-      <ion-input id="password" type="password" formControlName="password"></ion-input>
-    </ion-item>
-  </ion-list>
-  <div class="ion-padding">
-    <ion-button expand="block" class="ion-no-margin" type="submit" [disabled]="signInForm.invalid">Connexion</ion-button>
-  </div>
-</form>
-<ion-text color="danger">{{errorMessage}}</ion-text><
+<ion-content>
+  <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+    <ion-list lines="inset" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input id="email"  type="text" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Mot de passe</ion-label>
+        <ion-input id="password" type="password" formControlName="password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div class="ion-padding">
+      <ion-button expand="block" class="ion-no-margin" type="submit" [disabled]="signInForm.invalid">Connexion</ion-button>
+    </div>
+  </form>
+  <ion-text color="danger">{{errorMessage}}</ion-text>
+</ion-content>

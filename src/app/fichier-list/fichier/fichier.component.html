@@ -1,8 +1,15 @@
 <ion-content>
+  <ion-header translucent>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/" text="Retour"></ion-back-button>
+      </ion-buttons>
+      <ion-title>{{fichier.title}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
   <ion-card>
     <img *ngIf="typeService.checkImage(fichier.filext)" src="{{fichier.details}}" />
     <ion-card-header>
-      <ion-card-title>{{fichier.title}}</ion-card-title>
       <ion-card-subtitle>{{fichier.description}}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
@@ -12,7 +19,7 @@
       <div *ngIf="typeService.checkText(fichier.filext)" id="text">
         <pre><code>{{fichierText}}</code></pre>
       </div>
+      <ion-button (click)="showContextMenu()" expand="block">Voir les actions</ion-button>
     </ion-card-content>
-    <ion-button color="primary">Download</ion-button>
   </ion-card>
 </ion-content>

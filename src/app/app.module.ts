@@ -19,6 +19,10 @@ import {TypeService} from './services/type.service';
 import {AuthService} from "./services/auth.service";
 import { SigninComponent } from './auth/signin/signin.component';
 import {AuthGuardService} from "./services/auth-guard.service";
+import { AccountComponent } from './account/account.component';
+import { AdminComponent } from './admin/admin.component';
+import { WatchComponent } from './admin/watch/watch.component';
+import { UserComponent } from './admin/watch/user/user.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,10 @@ import {AuthGuardService} from "./services/auth-guard.service";
     DownloadFileComponent,
     HomeComponent,
     SigninComponent,
+    AccountComponent,
+    AdminComponent,
+    WatchComponent,
+    UserComponent,
   ],
     imports: [
         AppRoutingModule,

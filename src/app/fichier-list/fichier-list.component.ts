@@ -17,7 +17,7 @@ export class FichierListComponent implements OnInit, OnDestroy {
 
   fichiers: Fichier[];
   fichierSubscription: Subscription;
-  today: Date = new Date();
+  fichiersAvailable: Fichier[];
 
 
   constructor(private fichierService: FichierService, private router: Router, public typeService: TypeService) { }
@@ -26,6 +26,7 @@ export class FichierListComponent implements OnInit, OnDestroy {
     this.fichierSubscription = this.fichierService.fichiersSubject.subscribe(
       (fichiers: Fichier[]) => {
         this.fichiers = fichiers;
+        this.fichiersAvailable = fichiers.filter(element => new Date(element.expiration) > new Date());
       }
     );
     this.typeService.saveTypes();
@@ -48,22 +49,7 @@ export class FichierListComponent implements OnInit, OnDestroy {
     this.fichierSubscription.unsubscribe();
   }
 
-  onDownload(url: string) {
-    window.open(url, "_blank")
-  }
-
   checkAvailability(expiration: Date) {
     return new Date(expiration) > new Date();
-  }
-
-  onCopy(details: string, uuid: string) {
-    let input = document.getElementById(uuid) as HTMLInputElement;
-    input.focus();
-    input.select();
-    try {
-      document.execCommand('copy');
-    }catch (e) {
-      console.log(e)
-    }
   }
 }
